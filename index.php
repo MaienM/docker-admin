@@ -14,9 +14,22 @@ function adminer_object() {
         require_once $filename;
     }
 
-    // Import file for plugin specifications, allowing you to enable plugins without having to touch this file
+    // List of plugins
     global $plugins;
     $plugins = [];
+
+    // Load plugins from environment variable
+    if (isset($_ENV['ENABLED_PLUGINS'])) {
+        foreach (explode(',', $_ENV['ENABLED_PLUGINS']) as $plugin) {
+            if (class_exists($plugin)) {
+                $plugins[] = new $plugin;
+            } else {
+                print("Unknown plugin class $plugin");
+            }
+        }
+    }
+
+    // Import file for plugin specifications, allowing you to enable plugins without having to touch this file
     @include_once '/plugins/load.php';
 
     return new AdminerPlugin($plugins);

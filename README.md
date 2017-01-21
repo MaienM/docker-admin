@@ -18,7 +18,12 @@ provides links to tagged database containers.
 
 ### Enabling
 
-By default, no plugins are enabled. Plugins can be enabled by mounting a file to `/plugins/load.php` that sets the plugins up. Example:
+By default, no plugins are enabled.
+
+The easiest way to enable plugins is to set the environment variable `ENABLED_PLUGINS` to a comma-separated list of
+plugin class names. This only works for plugins that require no arguments.
+
+If you want more control, you can mount a file to `/plugins/load.php` that sets the plugins up. Example:
 
 ```php
 <?php
