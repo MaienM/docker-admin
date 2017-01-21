@@ -29,5 +29,5 @@ If you want more control, you can mount a file to `/plugins/load.php` that sets 
 <?php
 
 global $plugins;
-$plugins[] = 
+$plugins[] = new AdminerDumpZip;
 ```
