@@ -30,7 +30,9 @@ function adminer_object() {
     }
 
     // Import file for plugin specifications, allowing you to enable plugins without having to touch this file
-    @include_once '/plugins/load.php';
+    if (is_readable('/plugins/load.php')) {
+        require_once '/plugins/load.php';
+    }
 
     return new AdminerPlugin($plugins);
 }
