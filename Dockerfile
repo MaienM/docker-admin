@@ -3,7 +3,8 @@ FROM php:5-apache
 MAINTAINER Michon van Dooren <michon1992@gmail.com>
 
 # Install dependencies
-RUN docker-php-ext-install -j$(nproc) pdo_mysql
+RUN apt-get update && apt-get install -y libpq-dev
+RUN docker-php-ext-install -j$(nproc) pdo_mysql pdo_pgsql
 
 # Add + compile adminer
 COPY adminer/ /var/www/html/adminer/
